@@ -61,7 +61,7 @@ blueprint:
     pv_power:
       name: "PV Power"
       description: >
-        Sensor which contains your current **PV generated 
+        Sensor which contains your current **PV generated
         power** in watts. Must not be negative! For best results,
         this sensor should be updated at least every minute.
         **[WARNING]**
