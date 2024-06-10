@@ -23,16 +23,16 @@ blueprint:
         **This field must contain the *entity_id* you defined for this
         automation. The entity_id must be unique!
         You can check your automation entity_id by clicking
-        on the three dots in the top right corner of your automation 
+        on the three dots in the top right corner of your automation
         editor and selecting *info* --> *settings***
       selector:
         text:
     appliance_priority:
       name: "Appliance priority"
       description: >
-        Appliances with a higher number are prioritized compared to 
+        Appliances with a higher number are prioritized compared to
         appliances with a lower number.\n\n
-        If the priority is greater than 1000 this appliance will be switched on, 
+        If the priority is greater than 1000 this appliance will be switched on,
         even if the excess power is not sufficient for 100% of the needed power
       default: 1
       selector:
@@ -41,7 +41,6 @@ blueprint:
           max: 2000
           mode: box
           unit_of_measurement: "Priority level"
-
 
     grid_voltage:
       name: "Mains Voltage"
@@ -120,7 +119,6 @@ blueprint:
           domain: sensor
           multiple: false
 
-
     home_battery_level:
       name: "Home battery level"
       description: >
@@ -183,7 +181,6 @@ blueprint:
           domain: sensor
           multiple: false
 
-
     appliance_switch:
       name: "Appliance Entity"
       description: "Entity to control the appliance (e.g. switch entity, climate entity, light entity, ...)"
@@ -205,7 +202,6 @@ blueprint:
           max: 60
           step: 1
           unit_of_measurement: min
-
 
     appliance_on_only:
       name: "Only-On-Appliance"
@@ -284,7 +280,6 @@ blueprint:
           step: 1
           unit_of_measurement: phases
 
-
     defined_current:
       name: "Appliance typical current draw"
       description: >
@@ -309,13 +304,10 @@ blueprint:
           domain: sensor
           multiple: false
 
-
-
 mode: single
 trigger:
-- platform: homeassistant
-  event: start
-
+  - platform: homeassistant
+    event: start
 
 action:
   - service: pyscript.pv_excess_control
