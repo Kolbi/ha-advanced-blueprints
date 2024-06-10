@@ -263,7 +263,7 @@ blueprint:
         boolean:
     appliance_once_only:
       name: "Only-Run-Once-Appliance"
-      description: "Tick this box if your appliance should run **once a day** 
+      description: "Tick this box if your appliance should run **once a day**
       at most."
       default: false
       selector:
@@ -274,7 +274,7 @@ blueprint:
       description: >
         Tick this box if your appliance supports different current levels.
         \nUseful e.g.
-        for **wallboxes**.\nIf False, the appliance will only be switched 
+        for **wallboxes**.\nIf False, the appliance will only be switched
         on or off in relation to the PV excess.
       default: false
       selector:
