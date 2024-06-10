@@ -20,7 +20,7 @@ blueprint:
       name: "Automation Entity ID"
       description: >
         **[IMPORTANT]**
-        **This field must contain the *entity_id* you defined for this 
+        **This field must contain the *entity_id* you defined for this
         automation. The entity_id must be unique!
         You can check your automation entity_id by clicking
         on the three dots in the top right corner of your automation editor and selecting *info* --> *settings***
