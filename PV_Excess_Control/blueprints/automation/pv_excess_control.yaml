@@ -162,15 +162,15 @@ blueprint:
     min_home_battery_level:
       name: "Minimum home battery level (end of day)"
       description: >
-        Minimum desired power level (in percent) of your home battery 
+        Minimum desired power level (in percent) of your home battery
         (end of day)
         **[WARNING]**
         - **This sensor must be the same for all your created automations
         based on this blueprint!**
         **[NOTE]**
-        - If your solar system is not coupled with a battery, this field 
+        - If your solar system is not coupled with a battery, this field
         will be ignored.
-        - *If you also specify **solar production forecast***, the script 
+        - *If you also specify **solar production forecast***, the script
         will optimize
         your PV excess consumption right away and ensure that the specified
         *minimum home battery level* is reached at the **end of the day**.
