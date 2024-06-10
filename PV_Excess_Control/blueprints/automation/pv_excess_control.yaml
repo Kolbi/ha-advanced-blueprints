@@ -120,7 +120,7 @@ blueprint:
     import_export_power:
       name: "Combined Import/Export Power"
       description: >
-        Sensor which contains **both**, your current 
+        Sensor which contains **both**, your current
         **import power from the grid**
         (*positive* values) and your current **export power to the grid**
         in watts (*negative* values).
@@ -145,13 +145,13 @@ blueprint:
     home_battery_level:
       name: "Home battery level"
       description: >
-        Sensor which represents the **charge level of your home battery** 
+        Sensor which represents the **charge level of your home battery**
         (in percent)
         **[WARNING]**
         - **This sensor must be the same for all your created automations
         based on this blueprint!**
         **[NOTE]**
-        - If your solar system is not coupled with a battery, leave this field 
+        - If your solar system is not coupled with a battery, leave this field
         empty
       default:
       selector:
