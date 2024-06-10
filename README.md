@@ -12,4 +12,4 @@ If you like my work, you can support me here:\
 
 ## Documentation
 
-See seperate README within sub-folders
+See sepeaate README within sub-folders
