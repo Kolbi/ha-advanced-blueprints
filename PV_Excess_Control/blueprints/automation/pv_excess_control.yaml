@@ -263,8 +263,9 @@ blueprint:
         boolean:
     appliance_once_only:
       name: "Only-Run-Once-Appliance"
-      description: "Tick this box if your appliance should run **once a day**
-      at most."
+      description: >
+        Tick this box if your appliance should run **once a day**
+        at most.
       default: false
       selector:
         boolean:
