@@ -214,7 +214,8 @@ blueprint:
         - **This sensor must be the same for all your created automations
         based on this blueprint!**
         **[NOTE]**
-        - If your solar system is not coupled with a battery, leave this field empty
+        - If your solar system is not coupled with a battery, leave this field 
+        empty
       default:
       selector:
         entity:
@@ -224,7 +225,8 @@ blueprint:
     appliance_switch:
       name: "Appliance Entity"
       description: >
-        Entity to control the appliance (e.g. switch entity, climate entity, light entity, ...)
+        Entity to control the appliance (e.g. switch entity, climate
+        entity, light entity, ...)
       selector:
         entity:
           multiple: false
@@ -252,8 +254,10 @@ blueprint:
     appliance_on_only:
       name: "Only-On-Appliance"
       description: >
-        Tick this box if your appliance should only be turned on, but **never off**.
-        Useful e.g. for washing machines, which should not be turned off even if there is not enough solar power anymore.
+        Tick this box if your appliance should only be turned on, but 
+        **never off**.
+        Useful e.g. for washing machines, which should not be turned 
+        off even if there is not enough solar power anymore.
       default: false
       selector:
         boolean:
