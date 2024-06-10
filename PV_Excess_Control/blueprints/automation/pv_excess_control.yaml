@@ -214,7 +214,7 @@ blueprint:
         - **This sensor must be the same for all your created automations
         based on this blueprint!**
         **[NOTE]**
-        - If your solar system is not coupled with a battery, leave this field 
+        - If your solar system is not coupled with a battery, leave this field
         empty
       default:
       selector:
@@ -254,9 +254,9 @@ blueprint:
     appliance_on_only:
       name: "Only-On-Appliance"
       description: >
-        Tick this box if your appliance should only be turned on, but 
+        Tick this box if your appliance should only be turned on, but
         **never off**.
-        Useful e.g. for washing machines, which should not be turned 
+        Useful e.g. for washing machines, which should not be turned
         off even if there is not enough solar power anymore.
       default: false
       selector:
