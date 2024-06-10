@@ -48,7 +48,8 @@ blueprint:
         The voltage of your household electrical grid (**not** your appliance!).
         Typically 230V for most of EU, 110V for US.
         **[WARNING]**
-        - **This value must be the same for all your created automations based on this blueprint!**
+        - **This value must be the same for all your created automations
+        based on this blueprint!**
       default: 230
       selector:
         number:
@@ -60,8 +61,9 @@ blueprint:
     pv_power:
       name: "PV Power"
       description: >
-        Sensor which contains your current **PV generated power** in watts.
-        Must not be negative! For best results, this sensor should be updated at least every minute.
+        Sensor which contains your current **PV generated 
+        power** in watts. Must not be negative! For best results,
+        this sensor should be updated at least every minute.
         **[WARNING]**
         - **This sensor must be the same for all your created automations based on this blueprint!**
       selector:
