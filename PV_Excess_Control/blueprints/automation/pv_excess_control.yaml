@@ -425,4 +425,3 @@ action:
       import_export_power: !input import_export_power
       home_battery_capacity: !input home_battery_capacity
       solar_production_forecast: !input solar_production_forecast
-      appliance_once_only: !input appliance_once_only
