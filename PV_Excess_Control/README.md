@@ -2,19 +2,16 @@
 
 Automatically control your appliances (wallbox, heatpump, washing machine, ...) based on excess solar power.
 
-If you like my work, you can support me here:\
-[<img src="https://user-images.githubusercontent.com/1286821/181085373-12eee197-187a-4438-90fe-571ac6d68900.png" alt="Buy me a coffee" width="200" />](https://buymeacoffee.com/henrikIC)
-
 ## Features
 
-:white_check_mark: Works with hybrid and standard inverters\
+:white*check_mark: Works with hybrid and standard inverters\
 :white_check_mark: Configurable priority handling between multiple appliances\
 :white_check_mark: Include solar forecasts from **Solcast** to ensure your home battery is charged to a specific level at the end of the day\
-:white_check_mark: Define an _On/Off switch interval_ / solar power averaging interval\
-:white_check_mark: Supports dynamic current control (e.g. for wallboxes)\
+:white_check_mark: Define an \_On/Off switch interval* / solar power averaging interval\
+:white*check_mark: Supports dynamic current control (e.g. for wallboxes)\
 :white_check_mark: Define min. and max. current for appliances supporting dynamic current control\
 :white_check_mark: Supports one- and three-phase appliances\
-:white_check_mark: Supports _Only-Switch-On_ devices like washing machines or dishwashers
+:white_check_mark: Supports \_Only-Switch-On* devices like washing machines or dishwashers
 
 ## Prerequisites
 
@@ -70,3 +67,7 @@ If you like my work, you can support me here:\
 ### Deletion
 
 - To remove the auto-control of a single appliance, simply delete the related automation.
+
+## Credits
+
+Originally based and created by https://github.com/InventoCasa/ha-advanced-blueprints

@@ -235,6 +235,7 @@ def pv_excess_control(
     min_home_battery_level,
     dynamic_current_appliance,
     round_target_current,
+    deactivating_current,
     appliance_phases,
     min_current,
     max_current,
@@ -255,6 +256,7 @@ def pv_excess_control(
     appliance_maximum_run_time,
     appliance_minimum_run_time,
     appliance_runtime_deadline,
+    enabled,
 ):
     automation_id = (
         automation_id[11:] if automation_id[:11] == "automation." else automation_id
@@ -273,6 +275,7 @@ def pv_excess_control(
         min_home_battery_level,
         dynamic_current_appliance,
         round_target_current,
+        deactivating_current,
         appliance_phases,
         min_current,
         max_current,
@@ -293,6 +296,7 @@ def pv_excess_control(
         appliance_maximum_run_time,
         appliance_minimum_run_time,
         appliance_runtime_deadline,
+        enabled,
     )
 
 
@@ -337,6 +341,7 @@ class PvExcessControl:
         min_home_battery_level,
         dynamic_current_appliance,
         round_target_current,
+        deactivating_current,
         appliance_phases,
         min_current,
         max_current,
@@ -357,6 +362,7 @@ class PvExcessControl:
         appliance_maximum_run_time,
         appliance_minimum_run_time,
         appliance_runtime_deadline,
+        enabled,
     ):
         if automation_id not in PvExcessControl.instances:
             inst = self
@@ -374,9 +380,13 @@ class PvExcessControl:
         PvExcessControl.solar_production_forecast = solar_production_forecast
         PvExcessControl.time_of_sunset = time_of_sunset
         PvExcessControl.min_home_battery_level = float(min_home_battery_level)
+        PvExcessControl.min_home_battery_level_start = bool(
+            min_home_battery_level_start
+        )
 
         inst.dynamic_current_appliance = bool(dynamic_current_appliance)
         inst.round_target_current = bool(round_target_current)
+        inst.deactivating_current = bool(deactivating_current)
         inst.min_current = float(min_current)
         inst.max_current = float(max_current)
         inst.appliance_switch = appliance_switch
@@ -393,6 +403,7 @@ class PvExcessControl:
         inst.appliance_runtime_deadline = _get_time_object(appliance_runtime_deadline)
         inst.enforce_minimum_run = False
         inst.min_solar_percent = min_solar_percent / 100
+        inst.enabled = enabled
 
         inst.phases = appliance_phases
 
@@ -450,7 +461,7 @@ class PvExcessControl:
                 log_prefix = inst.log_prefix
 
                 # Check if automation is activated for specific instance
-                if not self.automation_activated(inst.automation_id):
+                if not self.automation_activated(inst.automation_id, inst.enabled):
                     continue
 
                 # Check if we are enforcing the minimum daily run time
@@ -496,6 +507,26 @@ class PvExcessControl:
                         PvExcessControl.home_battery_level
                     )
                 if (
+                    home_battery_level >= PvExcessControl.min_home_battery_level
+                    and PvExcessControl.min_home_battery_level_start
+                ):
+                    # home battery charge is high enough to direct solar power to appliances, if solar power is higher than load power
+                    # calc avg based on pv excess (solar power - load power) according to specified window
+                    avg_excess_power = int(
+                        sum(
+                            PvExcessControl.pv_history[
+                                -inst.appliance_switch_interval :
+                            ]
+                        )
+                        / max(1, inst.appliance_switch_interval)
+                    )
+                    log.debug(
+                        f"{log_prefix} Home battery charge is sufficient ({home_battery_level}/{PvExcessControl.min_home_battery_level} %)"
+                        f" AND {PvExcessControl.min_home_battery_level_start} is on. "
+                        f"Calculated average excess power based on >> solar power - load power <<: {avg_excess_power} W"
+                    )
+
+                elif (
                     home_battery_level >= PvExcessControl.min_home_battery_level
                     or not self._force_charge_battery()
                 ):
@@ -751,13 +782,13 @@ class PvExcessControl:
                             allowed_excess_power_consumption = _get_num_state(
                                 inst.actual_power
                             )
-                    elif inst.dynamic_current_appliance:
-                        allowed_excess_power_consumption = (
-                            inst.defined_current
-                            * PvExcessControl.grid_voltage
-                            * inst.phases
-                            * (1 - inst.min_solar_percent)
-                        )
+                    # 07.03.2025 elif inst.dynamic_current_appliance:
+                    #    allowed_excess_power_consumption = (
+                    #        inst.defined_current
+                    #        * PvExcessControl.grid_voltage
+                    #        * inst.phases
+                    #        * (1 - inst.min_solar_percent)
+                    # 07.03.2025    )
                     else:
                         allowed_excess_power_consumption = 0
 
@@ -839,21 +870,23 @@ class PvExcessControl:
                                 )
                             # diff_current is used to eventually lower current every interval
                             # diff_current_off is evaluated over the switch off interval and it is therefore used to turn off appliance
-                            diff_current = (
+                            diff_current = round(
                                 round(
                                     avg_excess_power
                                     / (PvExcessControl.grid_voltage * inst.phases),
                                     1,
                                 )
-                                + 1
+                                + 1,
+                                1,
                             )
-                            diff_current_off = (
+                            diff_current_off = round(
                                 round(
                                     avg_excess_power_off
                                     / (PvExcessControl.grid_voltage * inst.phases),
                                     1,
                                 )
-                                + 1
+                                + 1,
+                                1,
                             )
                             # Round up by 1A to compensate for oscillations
                             if inst.round_target_current:
@@ -900,12 +933,23 @@ class PvExcessControl:
                                     > -inst.min_current * inst.min_solar_percent
                                 ):
                                     log.debug(
-                                        f"{log_prefix} leaving dynamic appliance on at minimum current on at least {inst.min_solar_percent} solar"
+                                        f"{log_prefix} leaving dynamic appliance on at minimum current {inst.min_current} on at least {inst.min_solar_percent} solar - diff_current_off {diff_current_off}"
                                     )
                                 else:
                                     # current cannot be reduced
                                     # Set current to 0 and turn off appliance
-                                    _set_value(inst.appliance_current_set_entity, 0)
+                                    log.debug(
+                                        f"{log_prefix} switching dynamic appliance off min_current: {inst.min_current} min_solar_percent: {inst.min_solar_percent} diff_current_off: {diff_current_off}"
+                                    )
+                                    # Some wallboxes may need to set current to 0 for deactivating
+                                    if inst.deactivating_current:
+                                        _set_value(inst.appliance_current_set_entity, 0)
+                                    # homeassistant.exceptions.ServiceValidationError: Value 0.0 for number.keba_p30_keba_p30_charging_current is outside valid range 6 - 10.0
+                                    else:
+                                        _set_value(
+                                            inst.appliance_current_set_entity,
+                                            inst.min_current,
+                                        )
                                     inst.previous_current_buffer = 0
                                     power_consumption = self.switch_off(inst)
                                     if power_consumption != 0:
@@ -914,7 +958,6 @@ class PvExcessControl:
                                             f"{log_prefix} Added {power_consumption=} W to prev_consumption_sum, "
                                             f"which is now {prev_consumption_sum} W."
                                         )
-
                         else:
                             # Try to switch off appliance
                             power_consumption = self.switch_off(inst)
@@ -1066,10 +1109,10 @@ class PvExcessControl:
         Switches an appliance off, if possible.
         :param inst:        PVExcesscontrol Class instance
         :return:            Power consumption relief achieved through switching the appliance off (will be 0 if appliance could
-                             not be switched off)
+                            not be switched off)
         """
         # Check if automation is activated for specific instance
-        if not self.automation_activated(inst.automation_id):
+        if not self.automation_activated(inst.automation_id, inst.enabled):
             return 0
         # Do not turn off only-on-appliances
         if inst.appliance_on_only:
@@ -1111,10 +1154,11 @@ class PvExcessControl:
             self._adjust_pwr_history(inst, power_consumption)
             return power_consumption
 
-    def automation_activated(self, a_id):
+    def automation_activated(self, a_id, s_enabled):
         """
         Checks if the automation for a specific appliance is activated or not.
         :param a_id:    Automation ID in Home Assistant
+        :param s_enabled: Optional Switch for disabling the device
         :return:        True if automation is activated, False otherwise
         """
         automation_state = _get_state(a_id)
@@ -1128,6 +1172,11 @@ class PvExcessControl:
                 f'Automation "{a_id}" was deleted. Removing related class instance.'
             )
             del PvExcessControl.instances[a_id]
+            return False
+        elif automation_state == "on" and s_enabled and _get_state(s_enabled) == "off":
+            log.debug(
+                "Doing nothing, because automation is actived but optional switch is off."
+            )
             return False
         return True
 
