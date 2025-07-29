@@ -149,7 +149,8 @@ blueprint:
     import_export_power:
       name: "Combined Import/Export Power"
       description: >
-        Sensor which contains **both**, your current **import power from the grid** (*positive* values) and your current **export power to the grid** in watts (*negative* values).
+        Sensor which contains **both**, your current **import power from the grid** (*positive* 
+        values) and your current **export power to the grid** in watts (*negative* values).
 
         For best results, this sensor should be updated at least every minute.
 
@@ -158,9 +159,12 @@ blueprint:
 
         - **This sensor must be the same for all your created automations based on this blueprint!**
 
-        - **This sensor may only be specified when you cannot provide both the *Export Power* and *Load Power* sensor! This is normally the case when you have a standard inverter without battery.**
+        - **This sensor may only be specified when you cannot provide both the 
+        *Export Power* and *Load Power* sensor! This is normally the case when 
+        you have a standard inverter without battery.**
 
-        - **Do not use this sensor when you have a hybrid inverter with battery. Otherwise the script cannot detect when your battery is discharging to compensate for a load!**
+        - **Do not use this sensor when you have a hybrid inverter with battery. 
+        Otherwise the script cannot detect when your battery is discharging to compensate for a load!**
 
 
         **[NOTE]**
@@ -207,7 +211,9 @@ blueprint:
 
         - If your solar system is not coupled with a battery, this field will be ignored.
 
-        - *If you also specify **solar production forecast***, the script will optimize your PV excess consumption right away and ensure that the specified *minimum home battery level* is reached at the **end of the day**.
+        - *If you also specify **solar production forecast***, the script will optimize 
+        your PV excess consumption right away and ensure that the specified *minimum home 
+        battery level* is reached at the **end of the day**.
 
       default: 100
       selector:
