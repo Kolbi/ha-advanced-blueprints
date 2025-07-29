@@ -9,7 +9,7 @@ import datetime
 def _get_state(entity_id: str) -> Union[str, None]:
     """
     Get the state of an entity in Home Assistant
-    
+
     :param entity_id:  Name of the entity
     :return:            State if entity name is valid, else None
     """
@@ -38,7 +38,7 @@ def _get_state(entity_id: str) -> Union[str, None]:
 def _turn_off(entity_id: str) -> bool:
     """
     Switches an entity off
-    
+
     :param entity_id: ID of the entity
     """
     # get entity domain
@@ -62,7 +62,7 @@ def _turn_off(entity_id: str) -> bool:
 def _turn_on(entity_id: str) -> bool:
     """
     Switches an entity on
-    
+
     :param entity_id: ID of the entity
     """
     # get entity domain
@@ -86,7 +86,7 @@ def _turn_on(entity_id: str) -> bool:
 def _set_value(entity_id: str, value: Union[int, float, str]) -> bool:
     """
     Sets a number entity to a specific value
-    
+
     :param entity_id: ID of the entity
     :param value: Numerical value
     :return:
@@ -130,7 +130,7 @@ def _validate_number(
 ) -> Union[float, None]:
     """
     Validate if the passed variable is a number between -1000000 and 1000000.
-    
+
     :param value:           Value to validate (can be string or float)
     :param return_on_error: Value to return in case of error
     :return:                Number if valid, else None
@@ -153,7 +153,7 @@ def _validate_number(
 def _replace_vowels(input: str) -> str:
     """
     Function to replace lowercase vowels in a string
-    
+
     :param input:   Input string
     :return:        String with replaced vowels
     """
@@ -165,7 +165,7 @@ def _replace_vowels(input: str) -> str:
 def _get_time_object(input) -> datetime.time:
     """
     Function to convert input to datetime.time object
-    
+
     :param input:   Input to be processed
     :return:        datetime.time object with value of input, fallback to 23:59
     """
