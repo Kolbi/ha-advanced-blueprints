@@ -221,8 +221,8 @@ blueprint:
         will be ignored.
 
         - *If you also specify **solar production forecast***, the script will
-        optimize your PV excess consumption right away and ensure that the 
-        specified *minimum home battery level* is reached at the 
+        optimize your PV excess consumption right away and ensure that the
+        specified *minimum home battery level* is reached at the
         **end of the day**.
 
       default: 100
