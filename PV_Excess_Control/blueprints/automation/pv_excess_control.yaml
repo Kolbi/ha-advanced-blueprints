@@ -274,22 +274,23 @@ blueprint:
       description: >
         This parameter defines the maximum allowed difference between actual PV power
         production and current power consumption when the battery is fully charged
-        (SoC defined with *zero_feed_in_level*). Its purpose is to ignore small surplus values caused by system
-        inefficiencies or inverter standby consumption, and to avoid false positives in
-        PV production detection.
+        (SoC defined with *zero_feed_in_level*). Its purpose is to ignore small
+        surplus values caused by system inefficiencies or inverter standby 
+        consumption, and to avoid false positives in PV production detection.
 
         Recommended setting:
-        Set this value to approximately twice the typical difference observed when the
-        battery is full and PV production slightly exceeds the load.
+        Set this value to approximately twice the typical difference observed 
+        when the battery is full and PV production slightly exceeds the load.
         Typical values: 100 to 400 W
 
         Example:
-        If your system load is 500 W and PV shows 600 W when the battery is full, the
-        difference is 100 W → set the threshold to 200 W.
+        If your system load is 500 W and PV shows 600 W when the battery is 
+        full, the difference is 100 W → set the threshold to 200 W.
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations based on this blueprint!**
+        - **This sensor must be the same for all your created automations 
+        based on this blueprint!**
 
         **[NOTE]**
 
@@ -305,8 +306,8 @@ blueprint:
     zero_feed_in_level:
       name: "Zero Feed In - Battery Level"
       description: >
-        The power level (in percent) of your home battery must be higher than this value
-        before starting consuming even with zero feed in.
+        The power level (in percent) of your home battery must be higher 
+        than this value before starting consuming even with zero feed in.
 
         **[WARNING]**
 
