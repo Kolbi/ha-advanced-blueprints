@@ -1530,6 +1530,7 @@ class PvExcessControl:
             # Do not turn off if switch interval not reached
             if inst.switch_interval_counter < inst.appliance_switch_interval:
                 continue
+            # Skip appliances with equal or higher priority than max_priority
             if inst.appliance_priority >= max_priority:
                 continue
             if _get_state(inst.appliance_switch) != "on":
