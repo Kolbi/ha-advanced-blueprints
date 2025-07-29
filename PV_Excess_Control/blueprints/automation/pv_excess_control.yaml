@@ -228,7 +228,7 @@ blueprint:
         **[NOTE]**
 
         - **solar production forecast** must be filled
-      default: False
+      default: false
       selector:
         boolean:
 
