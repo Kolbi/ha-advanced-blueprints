@@ -34,7 +34,7 @@ blueprint:
     appliance_priority:
       name: "Appliance priority"
       description: >
-        Appliances with a higher number are prioritized compared to appliances 
+        Appliances with a higher number are prioritized compared to appliances
         with a lower number.
 
         If the priority is greater than 1000 this appliance will be switched on,
@@ -57,7 +57,7 @@ blueprint:
 
         **[WARNING]**
 
-        - **This value must be the same for all your created automations based 
+        - **This value must be the same for all your created automations based
         on this blueprint!**
       default: 230
       selector:
