@@ -87,8 +87,8 @@ blueprint:
     export_power:
       name: "Export Power"
       description: >
-        Sensor which contains your current **export power to the grid** in 
-        watts. Must not be negative! For best results, this sensor should 
+        Sensor which contains your current **export power to the grid** in
+        watts. Must not be negative! For best results, this sensor should
         be updated at least every minute.
 
 
