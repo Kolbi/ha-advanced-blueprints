@@ -416,8 +416,11 @@ blueprint:
 
         **[NOTE]**
 
-        - When first creating and executing your automation, it will most likely take the here defined time till your appliance can switch on, even if enough excess solar is available beforehand.
-        This is due to the excess_history getting populated with zeros at the beginning.
+        - When first creating and executing your automation, it will most 
+        likely take the here defined time till your appliance can switch on, 
+        even if enough excess solar is available beforehand.
+        This is due to the excess_history getting populated with zeros at 
+        the beginning.
       default: 5
       selector:
         number:
@@ -428,7 +431,8 @@ blueprint:
     appliance_switch_off_interval:
       name: "Appliance Off switch interval"
       description: >
-        Defines the minimum time (in minutes) before switching the appliance off again.
+        Defines the minimum time (in minutes) before switching the appliance 
+        off again.
 
         Will also be used as the averaging interval for available excess power.
 
@@ -447,9 +451,11 @@ blueprint:
     appliance_on_only:
       name: "Only-On-Appliance"
       description: >
-        Tick this box if your appliance should only be turned on, but **never off**.
+        Tick this box if your appliance should only be turned on, but **never 
+        off**.
 
-        Useful e.g. for washing machines, which should not be turned off even if there is not enough solar power anymore.
+        Useful e.g. for washing machines, which should not be turned off 
+        even if there is not enough solar power anymore.
       default: false
       selector:
         boolean:
@@ -464,19 +470,24 @@ blueprint:
     appliance_minimum_run_time:
       name: "Appliance minimum daily runtime"
       description: >
-        Enforces that an appliance runs a minimum time every day. Useful for things such as pool pumps.
+        Enforces that an appliance runs a minimum time every day. 
+        Useful for things such as pool pumps.
 
         Behavior is as follows:
 
-        - During the day, if remaining daily solar production forecast says there will be enough power to run the appliance, wait
+        - During the day, if remaining daily solar production forecast says 
+        there will be enough power to run the appliance, wait
 
-        - If remaining solar forecast is not enough to meet minimum runtime, turn on the appliance whenever there is some excess power
+        - If remaining solar forecast is not enough to meet minimum runtime, 
+        turn on the appliance whenever there is some excess power
 
-        - If the remaining minimum runtime is greater than the remaining time till the deadline, turn on the device.
+        - If the remaining minimum runtime is greater than the remaining 
+        time till the deadline, turn on the device.
 
         **[NOTE]**
 
-        - For this to work correctly, you must configure the time_of_sunset and solar_production_forecast fields
+        - For this to work correctly, you must configure the time_of_sunset 
+        and solar_production_forecast fields
       default: 0
       selector:
         number:
