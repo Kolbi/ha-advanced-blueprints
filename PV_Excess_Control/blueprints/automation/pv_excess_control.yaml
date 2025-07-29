@@ -26,8 +26,9 @@ blueprint:
 
         The entity_id must be unique!
 
-        You can check your automation entity_id by clicking on the three dots in the
-        top right corner of your automation editor and selecting *info* --> *settings*
+        You can check your automation entity_id by clicking on the three dots in 
+        the top right corner of your automation editor and selecting *info* --> 
+        *settings*
       selector:
         text:
     appliance_priority:
