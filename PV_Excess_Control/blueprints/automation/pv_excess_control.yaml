@@ -149,8 +149,8 @@ blueprint:
     import_export_power:
       name: "Combined Import/Export Power"
       description: >
-        Sensor which contains **both**, your current **import power from 
-        the grid** (*positive* values) and your current **export power 
+        Sensor which contains **both**, your current **import power from
+        the grid** (*positive* values) and your current **export power
         to the grid** in watts (*negative* values).
 
         For best results, this sensor should be updated at least every minute.
@@ -158,7 +158,7 @@ blueprint:
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations 
+        - **This sensor must be the same for all your created automations
         based on this blueprint!**
 
         - **This sensor may only be specified when you cannot provide both the
@@ -166,7 +166,7 @@ blueprint:
         you have a standard inverter without battery.**
 
         - **Do not use this sensor when you have a hybrid inverter with battery.
-        Otherwise the script cannot detect when your battery is discharging 
+        Otherwise the script cannot detect when your battery is discharging
         to compensate for a load!**
 
 
@@ -187,7 +187,7 @@ blueprint:
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations 
+        - **This sensor must be the same for all your created automations
         based on this blueprint!**
 
 
@@ -208,7 +208,7 @@ blueprint:
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations 
+        - **This sensor must be the same for all your created automations
         based on this blueprint!**
 
 
@@ -233,18 +233,18 @@ blueprint:
       description: >
         Minimum desired power level (in percent) of your home battery (to start).
 
-        Tick this box if your appliance should only be turned on, if enough battery 
+        Tick this box if your appliance should only be turned on, if enough battery
         level and without solar forecast prediction.
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations 
+        - **This sensor must be the same for all your created automations
         based on this blueprint!**
 
 
         **[NOTE]**
 
-        - *The home battery will be charged to the specified level *before* 
+        - *The home battery will be charged to the specified level *before*
         switching on appliances or to consider solar production forecast.
 
       default: false
@@ -254,12 +254,12 @@ blueprint:
     zero_feed_in:
       name: "Zero Feed In"
       description: >
-        If you have a zero feed in installation use solar production forecast 
+        If you have a zero feed in installation use solar production forecast
         instead of pure pv power.
 
         **[WARNING]**
 
-        - **This sensor must be the same for all your created automations 
+        - **This sensor must be the same for all your created automations
         based on this blueprint!**
 
         **[NOTE]**
