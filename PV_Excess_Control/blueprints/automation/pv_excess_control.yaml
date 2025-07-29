@@ -182,7 +182,8 @@ blueprint:
     home_battery_level:
       name: "Home battery level"
       description: >
-        Sensor which represents the **charge level of your home battery** (in percent)
+        Sensor which represents the **charge level of your home battery** (in 
+        percent)
 
 
         **[WARNING]**
@@ -193,7 +194,8 @@ blueprint:
 
         **[NOTE]**
 
-        - If your solar system is not coupled with a battery, leave this field empty
+        - If your solar system is not coupled with a battery, leave this field 
+        empty
       default:
       selector:
         entity:
@@ -203,7 +205,8 @@ blueprint:
     min_home_battery_level:
       name: "Minimum home battery level (end of day)"
       description: >
-        Minimum desired power level (in percent) of your home battery (end of day)
+        Minimum desired power level (in percent) of your home battery (end of 
+        day)
 
 
         **[WARNING]**
@@ -214,11 +217,12 @@ blueprint:
 
         **[NOTE]**
 
-        - If your solar system is not coupled with a battery, this field will be ignored.
+        - If your solar system is not coupled with a battery, this field 
+        will be ignored.
 
-        - *If you also specify **solar production forecast***, the script will optimize
-        your PV excess consumption right away and ensure that the specified *minimum home
-        battery level* is reached at the **end of the day**.
+        - *If you also specify **solar production forecast***, the script will 
+        optimize your PV excess consumption right away and ensure that the specified
+        *minimum home battery level* is reached at the **end of the day**.
 
       default: 100
       selector:
@@ -231,10 +235,11 @@ blueprint:
     min_home_battery_level_start:
       name: "Minimum home battery level (to start)"
       description: >
-        Minimum desired power level (in percent) of your home battery (to start).
+        Minimum desired power level (in percent) of your home battery (to start)
+        .
 
-        Tick this box if your appliance should only be turned on, if enough battery
-        level and without solar forecast prediction.
+        Tick this box if your appliance should only be turned on, if enough 
+        battery level and without solar forecast prediction.
 
         **[WARNING]**
 
@@ -272,11 +277,12 @@ blueprint:
     zero_feed_in_load:
       name: "Zero Feed In - Load"
       description: >
-        This parameter defines the maximum allowed difference between actual PV power
-        production and current power consumption when the battery is fully charged
-        (SoC defined with *zero_feed_in_level*). Its purpose is to ignore small
-        surplus values caused by system inefficiencies or inverter standby
-        consumption, and to avoid false positives in PV production detection.
+        This parameter defines the maximum allowed difference between actual PV 
+        power production and current power consumption when the battery is 
+        fully charged (SoC defined with *zero_feed_in_level*). Its purpose is 
+        to ignore small surplus values caused by system inefficiencies or 
+        inverter standby consumption, and to avoid false positives in PV 
+        production detection.
 
         Recommended setting:
         Set this value to approximately twice the typical difference observed
