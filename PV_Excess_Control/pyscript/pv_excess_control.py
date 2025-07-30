@@ -1106,7 +1106,9 @@ class PvExcessControl:
                 export_pwr_state = _get_num_state(PvExcessControl.export_power)
                 load_power_state = _get_num_state(PvExcessControl.load_power)
                 if PvExcessControl.home_battery_level is not None:
-                    home_battery_level = _get_num_state(PvExcessControl.home_battery_level)
+                    home_battery_level = _get_num_state(
+                        PvExcessControl.home_battery_level
+                    )
                 else:
                     home_battery_level = None
                 if (
