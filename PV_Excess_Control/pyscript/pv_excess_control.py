@@ -452,7 +452,11 @@ class PvExcessControl:
         inst.enforce_minimum_run = False
         inst.min_solar_percent = min_solar_percent
         inst.enabled = enabled
-        inst.phases = int(appliance_phases) if appliance_phases and str(appliance_phases).isdigit() else 1
+        inst.phases = (
+            int(appliance_phases)
+            if appliance_phases and str(appliance_phases).isdigit()
+            else 1
+        )
         inst.log_prefix = f"[{inst.appliance_switch} {inst.automation_id} (Prio {inst.appliance_priority})]"
         inst.domain = inst.appliance_switch.split(".")[0]
 
@@ -744,7 +748,8 @@ class PvExcessControl:
                                 or (
                                     prev_set_amps < inst.min_current
                                     and diff_current
-                                    >  _get_num_state(inst.min_solar_percent) * inst.min_current
+                                    > _get_num_state(inst.min_solar_percent)
+                                    * inst.min_current
                                 )
                             )
                             and not (
@@ -805,7 +810,9 @@ class PvExcessControl:
                         )
                         or (
                             avg_excess_power
-                            >= int(defined_power * _get_num_state(inst.min_solar_percent))
+                            >= int(
+                                defined_power * _get_num_state(inst.min_solar_percent)
+                            )
                             and inst.dynamic_current_appliance
                         )
                     ):
@@ -1048,7 +1055,10 @@ class PvExcessControl:
                             else:
                                 if diff_current_off >= -(
                                     inst.min_current
-                                    - (inst.min_current * _get_num_state(inst.min_solar_percent))
+                                    - (
+                                        inst.min_current
+                                        * _get_num_state(inst.min_solar_percent)
+                                    )
                                 ):
                                     log.debug(
                                         f"{inst.log_prefix} leaving dynamic appliance on at minimum current {inst.min_current} on at least {_get_num_state(inst.min_solar_percent)} solar - diff_current_off {diff_current_off}"
