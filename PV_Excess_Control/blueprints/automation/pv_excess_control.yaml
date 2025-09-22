@@ -658,14 +658,12 @@ blueprint:
         - **Currently only works with dynamic current appliances! It therefore
         runs the dynamic current appliance at minimum current as long as it can
         be partially run on solar.**
-
-      default: 100
+      default:
       selector:
-        number:
-          min: 1
-          max: 100
-          step: 1
-          unit_of_measurement: "%"
+        entity:
+          domain:
+            - input_number
+          multiple: false
     appliance_phases:
       name: "Appliance Phases"
       description: >
