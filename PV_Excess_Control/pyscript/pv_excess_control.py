@@ -670,6 +670,9 @@ class PvExcessControl:
                     )
                     continue
 
+                # Min Solar excess
+                value_min_solar_percent = _get_num_state(inst.min_solar_percent) if inst.min_solar_percent else 100
+
                 # -------------------------------------------------------------------
                 # Determine if appliance can be turned on or current can be increased
                 if _get_state(inst.appliance_switch) == "on":
@@ -748,7 +751,7 @@ class PvExcessControl:
                                 or (
                                     prev_set_amps < inst.min_current
                                     and diff_current
-                                    > _get_num_state(inst.min_solar_percent)
+                                    > value_min_solar_percent
                                     * inst.min_current
                                 )
                             )
@@ -811,13 +814,13 @@ class PvExcessControl:
                         or (
                             avg_excess_power
                             >= int(
-                                defined_power * _get_num_state(inst.min_solar_percent)
+                                defined_power * value_min_solar_percent
                             )
                             and inst.dynamic_current_appliance
                         )
                     ):
                         log.debug(
-                            f"{inst.log_prefix} Average Excess power ({avg_excess_power} W) is high enough to switch on appliance with {defined_power} or appliance has high priority {inst.appliance_priority} or it didn't meet minimum runtime yet or minimum solar power percentage (to start) fits: {defined_power * _get_num_state(inst.min_solar_percent)}."
+                            f"{inst.log_prefix} Average Excess power ({avg_excess_power} W) is high enough to switch on appliance with {defined_power} or appliance has high priority {inst.appliance_priority} or it didn't meet minimum runtime yet or minimum solar power percentage (to start) fits: {defined_power * value_min_solar_percent}."
                         )
                         if (
                             inst.switch_interval_counter
@@ -869,7 +872,7 @@ class PvExcessControl:
                                 )
                     else:
                         log.debug(
-                            f"{inst.log_prefix} Average Excess power ({avg_excess_power} W) not high enough to switch on appliance with {defined_power} or appliance has high priority {inst.appliance_priority} or it didn't meet minimum runtime yet or minimum solar power percentage (to start) fits: {defined_power * _get_num_state(inst.min_solar_percent)}."
+                            f"{inst.log_prefix} Average Excess power ({avg_excess_power} W) not high enough to switch on appliance with {defined_power} or appliance has high priority {inst.appliance_priority} or it didn't meet minimum runtime yet or minimum solar power percentage (to start) fits: {defined_power * value_min_solar_percent}."
                         )
                 # -------------------------------------------------------------------
 
@@ -902,7 +905,7 @@ class PvExcessControl:
                     #        inst.defined_current
                     #        * PvExcessControl.grid_voltage
                     #        * inst.phases
-                    #        * (1 - _get_num_state(inst.min_solar_percent))
+                    #        * (1 - value_min_solar_percent)
                     # 07.03.2025    )
                     else:
                         allowed_excess_power_consumption = 0
@@ -1057,17 +1060,17 @@ class PvExcessControl:
                                     inst.min_current
                                     - (
                                         inst.min_current
-                                        * _get_num_state(inst.min_solar_percent)
+                                        * value_min_solar_percent
                                     )
                                 ):
                                     log.debug(
-                                        f"{inst.log_prefix} leaving dynamic appliance on at minimum current {inst.min_current} on at least {_get_num_state(inst.min_solar_percent)} solar - diff_current_off {diff_current_off}"
+                                        f"{inst.log_prefix} leaving dynamic appliance on at minimum current {inst.min_current} on at least {value_min_solar_percent} solar - diff_current_off {diff_current_off}"
                                     )
                                 else:
                                     # current cannot be reduced
                                     # Set current to 0 and turn off appliance
                                     log.debug(
-                                        f"{inst.log_prefix} switching dynamic appliance off min_current: {inst.min_current} min_solar_percent: {_get_num_state(inst.min_solar_percent)} diff_current_off: {diff_current_off}"
+                                        f"{inst.log_prefix} switching dynamic appliance off min_current: {inst.min_current} min_solar_percent: {value_min_solar_percent} diff_current_off: {diff_current_off}"
                                     )
                                     # Some wallboxes may need to set current to 0 for deactivating
                                     if inst.deactivating_current:
