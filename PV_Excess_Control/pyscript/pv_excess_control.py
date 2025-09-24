@@ -670,12 +670,18 @@ class PvExcessControl:
                     )
                     continue
 
-                # Min Solar excess
-                value_min_solar_percent = (
-                    _get_num_state(inst.min_solar_percent)
-                    if inst.min_solar_percent
-                    else 100
-                )
+                # Minimum Solar Excess
+                if inst.min_solar_percent:
+                    value_min_solar_percent = _get_num_state(inst.min_solar_percent)
+                    log.debug(
+                        f"{inst.log_prefix} Minimum Solar Percent: {value_min_solar_percent} "
+                        f"from {inst.min_solar_percent}"
+                    )
+                else:
+                    value_min_solar_percent = 100
+                    log.debug(
+                        f"{inst.log_prefix} Minimum Solar Percent: default 100"
+                    )
 
                 # -------------------------------------------------------------------
                 # Determine if appliance can be turned on or current can be increased
