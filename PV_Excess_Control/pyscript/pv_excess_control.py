@@ -671,7 +671,11 @@ class PvExcessControl:
                     continue
 
                 # Min Solar excess
-                value_min_solar_percent = _get_num_state(inst.min_solar_percent) if inst.min_solar_percent else 100
+                value_min_solar_percent = (
+                    _get_num_state(inst.min_solar_percent)
+                    if inst.min_solar_percent
+                    else 100
+                )
 
                 # -------------------------------------------------------------------
                 # Determine if appliance can be turned on or current can be increased
@@ -751,8 +755,7 @@ class PvExcessControl:
                                 or (
                                     prev_set_amps < inst.min_current
                                     and diff_current
-                                    > value_min_solar_percent
-                                    * inst.min_current
+                                    > value_min_solar_percent * inst.min_current
                                 )
                             )
                             and not (
@@ -813,9 +816,7 @@ class PvExcessControl:
                         )
                         or (
                             avg_excess_power
-                            >= int(
-                                defined_power * value_min_solar_percent
-                            )
+                            >= int(defined_power * value_min_solar_percent)
                             and inst.dynamic_current_appliance
                         )
                     ):
@@ -1058,10 +1059,7 @@ class PvExcessControl:
                             else:
                                 if diff_current_off >= -(
                                     inst.min_current
-                                    - (
-                                        inst.min_current
-                                        * value_min_solar_percent
-                                    )
+                                    - (inst.min_current * value_min_solar_percent)
                                 ):
                                     log.debug(
                                         f"{inst.log_prefix} leaving dynamic appliance on at minimum current {inst.min_current} on at least {value_min_solar_percent} solar - diff_current_off {diff_current_off}"
