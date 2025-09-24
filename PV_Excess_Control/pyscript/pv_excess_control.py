@@ -679,9 +679,7 @@ class PvExcessControl:
                     )
                 else:
                     value_min_solar_percent = 100
-                    log.debug(
-                        f"{inst.log_prefix} Minimum Solar Percent: default 100"
-                    )
+                    log.debug(f"{inst.log_prefix} Minimum Solar Percent: default 100")
 
                 # -------------------------------------------------------------------
                 # Determine if appliance can be turned on or current can be increased
