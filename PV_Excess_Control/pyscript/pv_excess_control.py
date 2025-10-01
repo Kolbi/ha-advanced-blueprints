@@ -1309,8 +1309,11 @@ class PvExcessControl:
             return 0
         # Do not turn off only-on-appliances
         if inst.appliance_on_only:
+            inst.daily_run_time += (
+                datetime.datetime.now() - inst.switched_on_time
+            ).total_seconds()
             log.debug(
-                f'{inst.log_prefix} "Only-On-Appliance" detected - Not switching off.'
+                f'{inst.log_prefix} "Only-On-Appliance" detected - Not switching off. Appliance has run for {(inst.daily_run_time / 60):.1f} minutes'
             )
             return 0
         # Do not turn off if switch interval not reached
