@@ -492,6 +492,7 @@ blueprint:
             the here defined time till your appliance can switch on, even if enough excess
             solar is available beforehand. This is due to the excess_history getting populated
             with zeros at the beginning.
+            - Always keep this above 0 min!
 
             '
           default: 5
