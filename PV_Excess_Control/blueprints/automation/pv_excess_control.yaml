@@ -36,6 +36,23 @@ blueprint:
             text:
               multiple: false
               multiline: false
+        appliance_priority:
+          name: Appliance priority
+          description: 'Appliances with a higher number are prioritized compared to appliances
+            with a lower number.
+
+            If the priority is greater than 1000 this appliance will be switched on, even
+            if the excess power is not sufficient for 100% of the needed power
+
+            '
+          default: 1
+          selector:
+            number:
+              min: 1.0
+              max: 2000.0
+              mode: box
+              unit_of_measurement: Priority level
+              step: 1.0
         grid_voltage:
           name: Mains Voltage
           description: 'The voltage of your household electrical grid (**not** your appliance!).
@@ -452,23 +469,6 @@ blueprint:
       description: Configure the specific appliance to be controlled.
       collapsed: true
       input:
-        appliance_priority:
-          name: Appliance priority
-          description: 'Appliances with a higher number are prioritized compared to appliances
-            with a lower number.
-
-            If the priority is greater than 1000 this appliance will be switched on, even
-            if the excess power is not sufficient for 100% of the needed power
-
-            '
-          default: 1
-          selector:
-            number:
-              min: 1.0
-              max: 2000.0
-              mode: box
-              unit_of_measurement: Priority level
-              step: 1.0
         appliance_switch:
           name: Appliance Entity
           description: 'Entity to control the appliance (e.g. switch entity, climate entity,
