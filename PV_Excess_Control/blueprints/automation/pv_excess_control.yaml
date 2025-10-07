@@ -105,6 +105,8 @@ blueprint:
             - If you can''t measure this value directly, leave this field empty and provide
             a combined import/export power sensor.
 
+            - For a zero-feedin config you need to create a template sensor that is always 0 and input that here.
+
             '
           default:
           selector:
