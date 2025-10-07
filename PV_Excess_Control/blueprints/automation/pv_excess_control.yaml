@@ -482,7 +482,22 @@ blueprint:
               reorder: false
         enabled:
           name: Enable Device Switch
-          description: 'Optional switch/boolean which Enables/Disables the Device.
+          description: 'Optional entity to enable/disable this appliance automation.
+    
+           allows you to enable / disable the device control without an extra automation needed - just add a binary state sensor!
+    
+            **When ON/True**: Appliance will be controlled automatically based on PV excess power
+            **When OFF/False**: Appliance will be completely ignored by the automation
+    
+            **Compatible entities:**
+            - **input_boolean**: Manual dashboard control
+            - **switch**: Physical or virtual switches  
+            - **binary_sensor**: Presence sensors, occupancy detection, etc.
+    
+            **Examples:**
+            - `input_boolean.pool_pump_enabled` - Manual control
+            - `binary_sensor.family_home` - Only run when someone is home
+            - `binary_sensor.workday` - Only run on workdays
 
             '
           default:
