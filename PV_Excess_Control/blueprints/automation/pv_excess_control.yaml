@@ -1,5 +1,5 @@
 blueprint:
-  name: INVENTOCASA - PV Excess Optimizer
+  name: PV Excess Optimizer
   description: '### **PV EXCESS OPTIMIZER**
 
     Automatically control your appliances based on excess power from your solar system
