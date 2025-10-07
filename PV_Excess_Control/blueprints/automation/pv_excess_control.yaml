@@ -480,6 +480,19 @@ blueprint:
             entity:
               multiple: false
               reorder: false
+        enabled:
+          name: Enable Device Switch
+          description: 'Optional switch/boolean which Enables/Disables the Device.
+
+            '
+          default:
+          selector:
+            entity:
+              domain:
+              - input_boolean
+              - switch
+              multiple: false
+              reorder: false
         appliance_switch_interval:
           name: Appliance On/Off switch interval
           description: 'Defines the minimum time (in minutes) before switching the appliance
@@ -601,19 +614,7 @@ blueprint:
               - sensor
               multiple: false
               reorder: false
-        enabled:
-          name: Enable Device Switch
-          description: 'Optional switch/boolean which Enables/Disables the Device.
 
-            '
-          default:
-          selector:
-            entity:
-              domain:
-              - input_boolean
-              - switch
-              multiple: false
-              reorder: false
 
     appliance_runtime_settings:
       name: Appliance Runtime Settings
