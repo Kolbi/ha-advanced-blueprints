@@ -1,6 +1,6 @@
 blueprint:
   name: PV Excess Optimizer
-  description: '### **PV EXCESS OPTIMIZER**
+  description: "### **PV EXCESS OPTIMIZER**
 
     Automatically control your appliances based on excess power from your solar system
     <br> <br> &rarr; Remember to read the **[README](https://github.com/nicorusti/ha-advanced-blueprints/blob/main/PV_Excess_Control/README.md)**
@@ -10,7 +10,7 @@ blueprint:
 
     &rarr; Bugs and feature requests can be created directly on the [GitHub repository](https://github.com/nicorusti/ha-advanced-blueprints)
 
-    '
+    "
   domain: automation
   input:
     general_settings:
@@ -21,7 +21,7 @@ blueprint:
       input:
         automation_id:
           name: Automation Entity ID
-          description: '**[IMPORTANT]**
+          description: "**[IMPORTANT]**
 
             **This field must contain the *entity_id* you defined for this automation.**
 
@@ -30,21 +30,22 @@ blueprint:
             You can check your automation entity_id by clicking on the three dots in the
             top right corner of your automation editor and selecting *info* --> *settings*
 
-            '
-          default: ''
+            "
+          default: ""
           selector:
             text:
               multiple: false
               multiline: false
         appliance_priority:
           name: Appliance priority
-          description: 'Appliances with a higher number are prioritized compared to appliances
+          description:
+            "Appliances with a higher number are prioritized compared to appliances
             with a lower number.
 
             If the priority is greater than 1000 this appliance will be switched on, even
             if the excess power is not sufficient for 100% of the needed power
 
-            '
+            "
           default: 1
           selector:
             number:
@@ -55,7 +56,8 @@ blueprint:
               step: 1.0
         grid_voltage:
           name: Mains Voltage
-          description: 'The voltage of your household electrical grid (**not** your appliance!).
+          description:
+            "The voltage of your household electrical grid (**not** your appliance!).
 
             Typically 230V for most of EU, 110V for US.
 
@@ -65,7 +67,7 @@ blueprint:
             - **This value must be the same for all your created automations based on
             this blueprint!**
 
-            '
+            "
           default: 230
           selector:
             number:
@@ -83,8 +85,9 @@ blueprint:
       input:
         pv_power:
           name: PV Power
-          default: ''
-          description: 'Sensor which contains your current **PV generated power** in watts.
+          default: ""
+          description:
+            "Sensor which contains your current **PV generated power** in watts.
 
             Must not be negative! For best results, this sensor should be updated at least
             every minute.
@@ -95,16 +98,17 @@ blueprint:
             - **This sensor must be the same for all your created automations based on
             this blueprint!**
 
-            '
+            "
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         export_power:
           name: Export Power
-          description: 'Sensor which contains your current **export power to the grid**
+          description:
+            "Sensor which contains your current **export power to the grid**
             in watts. Must not be negative! For best results, this sensor should be updated
             at least every minute.
 
@@ -119,22 +123,23 @@ blueprint:
 
             **[NOTE]**
 
-            - If you can''t measure this value directly, leave this field empty and provide
+            - If you can't measure this value directly, leave this field empty and provide
             a combined import/export power sensor.
 
             - For a zero-feedin config you need to create a template sensor that is always 0 and input that here.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         load_power:
           name: Load Power
-          description: 'Sensor which contains your current **load power** (*combined household
+          description:
+            "Sensor which contains your current **load power** (*combined household
             appliance consumption without home battery charging consumption*) in watts.
             Must not be negative!
 
@@ -151,7 +156,7 @@ blueprint:
 
             **[NOTE]**
 
-            - If you can''t measure this value directly, leave this field empty and provide
+            - If you can't measure this value directly, leave this field empty and provide
             a combined import/export power sensor.
 
             - The combined household appliance consumption will always be prioritized,
@@ -159,17 +164,18 @@ blueprint:
             power is near zero, your appliance with the lowest priority will be switched
             off (according to its On/Off switch interval).
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         import_export_power:
           name: Combined Import/Export Power
-          description: 'Sensor which contains **both**, your current **import power from
+          description:
+            "Sensor which contains **both**, your current **import power from
             the grid** (*positive* values) and your current **export power to the grid**
             in watts (*negative* values).
 
@@ -194,12 +200,12 @@ blueprint:
 
             - This is typically the value your household energy meter shows.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
 
@@ -211,7 +217,8 @@ blueprint:
       input:
         home_battery_level:
           name: Home battery level
-          description: 'Sensor which represents the **charge level of your home battery**
+          description:
+            "Sensor which represents the **charge level of your home battery**
             (in percent)
 
 
@@ -225,17 +232,18 @@ blueprint:
 
             - If your solar system is not coupled with a battery, leave this field empty
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         min_home_battery_level:
           name: Minimum home battery level (end of day)
-          description: 'Minimum desired power level (in percent) of your home battery
+          description:
+            "Minimum desired power level (in percent) of your home battery
             (end of day)
 
 
@@ -253,18 +261,19 @@ blueprint:
             your PV excess consumption right away and ensure that the specified *minimum
             home battery level* is reached at the **end of the day**.
 
-            '
+            "
           default: 100
           selector:
             number:
               min: 0.0
               max: 100.0
               step: 5.0
-              unit_of_measurement: '%'
+              unit_of_measurement: "%"
               mode: slider
         min_home_battery_level_start:
           name: Minimum home battery level (to start)
-          description: 'Minimum desired power level (in percent) of your home battery
+          description:
+            "Minimum desired power level (in percent) of your home battery
             (to start) .
 
             Tick this box if your appliance should only be turned on, if enough battery
@@ -281,13 +290,13 @@ blueprint:
             - *The home battery will be charged to the specified level *before* switching
             on appliances or to consider solar production forecast.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         home_battery_capacity:
           name: Home battery capacity
-          description: 'The usable capacity (in kWh) of your home battery
+          description: "The usable capacity (in kWh) of your home battery
 
 
             **[WARNING]**
@@ -300,7 +309,7 @@ blueprint:
 
             - If your solar system is not coupled with a battery, this field will be ignored.
 
-            '
+            "
           default: 0
           selector:
             number:
@@ -318,7 +327,8 @@ blueprint:
       input:
         zero_feed_in:
           name: Zero Feed In
-          description: 'If you have a zero feed in installation use solar production forecast
+          description:
+            "If you have a zero feed in installation use solar production forecast
             instead of pure pv power.
 
             **[WARNING]**
@@ -330,13 +340,14 @@ blueprint:
 
             - **solar production forecast** must be filled
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         zero_feed_in_load:
           name: Zero Feed In - Load
-          description: 'This parameter defines the maximum allowed difference between
+          description:
+            "This parameter defines the maximum allowed difference between
             actual PV power production and current power consumption when the battery
             is fully charged (SoC defined with *zero_feed_in_level*). Its purpose is to
             ignore small surplus values caused by system inefficiencies or inverter standby
@@ -358,7 +369,7 @@ blueprint:
 
             - **zero_feed_in** must be activated
 
-            '
+            "
           default: 300
           selector:
             number:
@@ -369,7 +380,8 @@ blueprint:
               mode: slider
         zero_feed_in_level:
           name: Zero Feed In - Battery Level
-          description: 'The power level (in percent) of your home battery must be higher
+          description:
+            "The power level (in percent) of your home battery must be higher
             than this value before starting consuming even with zero feed in.
 
             **[WARNING]**
@@ -382,14 +394,14 @@ blueprint:
             - **zero_feed_in** must be activated - value must be set if home battery is
             installed
 
-            '
+            "
           default: 99
           selector:
             number:
               min: 0.0
               max: 100.0
               step: 1.0
-              unit_of_measurement: '%'
+              unit_of_measurement: "%"
               mode: slider
 
     solar_forecast_settings:
@@ -399,8 +411,9 @@ blueprint:
       collapsed: true
       input:
         solar_production_forecast:
-          name: '*Remaining* solar production forecast (Solcast or Forecast.Solar)'
-          description: 'Sensor which represents the **remaining solar production forecast**
+          name: "*Remaining* solar production forecast (Solcast or Forecast.Solar)"
+          description:
+            "Sensor which represents the **remaining solar production forecast**
             for the current day (in kWh). Will be used to ensure the specified *minimum
             home battery level* is reached at the end of the day.
 
@@ -416,17 +429,18 @@ blueprint:
             - If your solar system is not coupled with a battery or if you are not enforcing
             a minimum appliance run time, leave this field empty
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         solar_production_forecast_this_hour:
           name: Solar production forecast current hour (Solcast or Forecast.Solar)
-          description: 'Sensor showing the solar forecast for the current hour (in kWh).
+          description:
+            "Sensor showing the solar forecast for the current hour (in kWh).
             Will be used in case Zero_feed_in is active, to have a better estimation of
             available PV power to be redirected to appliances. **[WARNING]**
 
@@ -435,31 +449,32 @@ blueprint:
 
             **[NOTE]**
 
-            - If you do not have zero_feed_in option enabled (you''re exporting excess
+            - If you do not have zero_feed_in option enabled (you're exporting excess
             power to grid), leave this field empty.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
         time_of_sunset:
-          name: 'The time of sunset at the current location '
-          description: 'The time of sunset in the current location. You can use `sensor.sun_next_setting`.
+          name: "The time of sunset at the current location "
+          description:
+            "The time of sunset in the current location. You can use `sensor.sun_next_setting`.
 
             **[NOTE]**
 
             - This MUST be set if Appliance minimum daily runtime is set.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
 
@@ -471,10 +486,11 @@ blueprint:
       input:
         appliance_switch:
           name: Appliance Entity
-          description: 'Entity to control the appliance (e.g. switch entity, climate entity,
+          description:
+            "Entity to control the appliance (e.g. switch entity, climate entity,
             light entity, ...)
 
-            '
+            "
           default:
           selector:
             entity:
@@ -482,35 +498,37 @@ blueprint:
               reorder: false
         enabled:
           name: Enable Device Switch
-          description: 'Optional entity to enable/disable this appliance automation.
-    
-           allows you to enable / disable the device control without an extra automation needed - just add a binary state sensor!
-    
+          description:
+            "Optional entity to enable/disable this appliance automation.
+
+            allows you to enable / disable the device control without an extra automation needed - just add a binary state sensor!
+
             **When ON/True**: Appliance will be controlled automatically based on PV excess power
             **When OFF/False**: Appliance will be completely ignored by the automation
-    
+
             **Compatible entities:**
             - **input_boolean**: Manual dashboard control
-            - **switch**: Physical or virtual switches  
+            - **switch**: Physical or virtual switches
             - **binary_sensor**: Presence sensors, occupancy detection, etc.
-    
+
             **Examples:**
             - `input_boolean.pool_pump_enabled` - Manual control
             - `binary_sensor.family_home` - Only run when someone is home
             - `binary_sensor.workday` - Only run on workdays
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - input_boolean
-              - switch
+                - input_boolean
+                - switch
               multiple: false
               reorder: false
         appliance_switch_interval:
           name: Appliance On/Off switch interval
-          description: 'Defines the minimum time (in minutes) before switching the appliance
+          description:
+            "Defines the minimum time (in minutes) before switching the appliance
             on/off again.
 
             Will also be used as the averaging interval for available excess power.
@@ -524,7 +542,7 @@ blueprint:
             with zeros at the beginning.
             - Always keep this above 0 min!
 
-            '
+            "
           default: 5
           selector:
             number:
@@ -535,7 +553,8 @@ blueprint:
               mode: slider
         appliance_switch_off_interval:
           name: Appliance Off switch interval
-          description: 'Defines the minimum time (in minutes) before switching the appliance
+          description:
+            "Defines the minimum time (in minutes) before switching the appliance
             off again.
 
             Will also be used as the averaging interval for available excess power.
@@ -545,7 +564,7 @@ blueprint:
 
             - This currently only applies to dynamic current instances
 
-            '
+            "
           default: 5
           selector:
             number:
@@ -556,27 +575,30 @@ blueprint:
               mode: slider
         appliance_on_only:
           name: Only-On-Appliance
-          description: 'Tick this box if your appliance should only be turned on, but
+          description:
+            "Tick this box if your appliance should only be turned on, but
             **never off**.
 
             Useful e.g. for washing machines, which should not be turned off even if there
             is not enough solar power anymore.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         appliance_once_only:
           name: Only-Run-Once-Appliance
-          description: 'Tick this box if your appliance should run **once a day** at most.
+          description:
+            "Tick this box if your appliance should run **once a day** at most.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         appliance_phases:
           name: Appliance Phases
-          description: 'Input here, with how many phases your appliance works. Typically,
+          description:
+            "Input here, with how many phases your appliance works. Typically,
             you either have 1 phase (e.g. washing machine, dishwasher) or 3 phases (wallbox).
 
 
@@ -585,7 +607,7 @@ blueprint:
             If you have a three-phase wallbox, but your car can only charge with one phase,
             you need to input 1 here.
 
-            '
+            "
           default: 1
           selector:
             number:
@@ -596,7 +618,8 @@ blueprint:
               mode: slider
         defined_current:
           name: Appliance typical current draw
-          description: 'Typical/expected current draw of your appliance per phase.
+          description:
+            "Typical/expected current draw of your appliance per phase.
 
             Relevant for deciding how much excess is needed before turning the specific
             appliance on.
@@ -604,7 +627,7 @@ blueprint:
             If your appliance supports dynamic current setting, set the *typical current*
             to the same value as the *minimum dynamic current*.
 
-            '
+            "
           default: 6
           selector:
             number:
@@ -615,21 +638,21 @@ blueprint:
               mode: slider
         actual_power:
           name: Appliance actual power sensor
-          description: 'Sensor which contains the **current power consumption** of the
+          description:
+            "Sensor which contains the **current power consumption** of the
             appliance in watts.
 
             If this is left empty (not recommended), the *typical current draw* will be
             used instead.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - sensor
+                - sensor
               multiple: false
               reorder: false
-
 
     appliance_runtime_settings:
       name: Appliance Runtime Settings
@@ -639,7 +662,8 @@ blueprint:
       input:
         appliance_minimum_run_time:
           name: Appliance minimum daily runtime
-          description: 'Enforces that an appliance runs a minimum time every day. Useful
+          description:
+            "Enforces that an appliance runs a minimum time every day. Useful
             for things such as pool pumps.
 
             Behavior is as follows:
@@ -658,7 +682,7 @@ blueprint:
             - For this to work correctly, you must configure the time_of_sunset and solar_production_forecast
             fields
 
-            '
+            "
           default: 0
           selector:
             number:
@@ -669,10 +693,11 @@ blueprint:
               mode: slider
         appliance_maximum_run_time:
           name: Appliance maximum daily runtime
-          description: 'Limits the maximum time the appliance should run in a day. 0 means
+          description:
+            "Limits the maximum time the appliance should run in a day. 0 means
             infinite time. This value must be greater than minimum runtime.
 
-            '
+            "
           default: 0
           selector:
             number:
@@ -683,11 +708,12 @@ blueprint:
               mode: slider
         appliance_runtime_deadline:
           name: Appliance Runtime Deadline
-          description: "The latest time by which the appliance must have completed its
+          description:
+            "The latest time by which the appliance must have completed its
             minimum\n runtime. If not set, midnight (23:59) will be used as default.\n\n**Example:**
             If you set `22:30:00`, the automation will ensure that the appliance has met
             its minimum runtime by 22:30.\n"
-          default: '23:59:00'
+          default: "23:59:00"
           selector:
             time: {}
 
@@ -699,35 +725,39 @@ blueprint:
       input:
         dynamic_current_appliance:
           name: Dynamic current control
-          description: 'Tick this box if your appliance supports different current levels.
+          description:
+            "Tick this box if your appliance supports different current levels.
             Useful e.g. for **wallboxes**. If false, the appliance will only be switched
             on or off in relation to the PV excess.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         round_target_current:
           name: Round target current
-          description: 'Tick this box if your appliance only supports integer target currents.
+          description:
+            "Tick this box if your appliance only supports integer target currents.
             Will round to full integers.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         deactivating_current:
           name: Wallbox Deactivation with current 0?
-          description: 'Tick this box if your wallbox needs to be set to current 0 for
+          description:
+            "Tick this box if your wallbox needs to be set to current 0 for
             deactivating else min_current is used.
 
-            '
+            "
           default: false
           selector:
             boolean: {}
         appliance_current_interval:
           name: Appliance current interval
-          description: 'Specifies the minimum time (in minutes) that must pass before
+          description:
+            "Specifies the minimum time (in minutes) that must pass before
             the power setting can be dynamically adjusted again.
 
 
@@ -735,7 +765,7 @@ blueprint:
 
             - **Only relevant when dynamic current control is set!**
 
-            '
+            "
           default: 1
           selector:
             number:
@@ -746,7 +776,8 @@ blueprint:
               mode: slider
         appliance_current_set_entity:
           name: Appliance SetCurrent entity
-          description: 'The number entity to which the calculated current will be sent.
+          description:
+            "The number entity to which the calculated current will be sent.
 
 
             **[NOTE]**
@@ -755,18 +786,18 @@ blueprint:
 
             Leave empty if *dynamic current control* is deactivated.
 
-            '
+            "
           default:
           selector:
             entity:
               domain:
-              - number
-              - input_number
+                - number
+                - input_number
               multiple: false
               reorder: false
         min_current:
           name: Minimum dynamic current
-          description: 'Minimum current per phase your appliance can handle.
+          description: "Minimum current per phase your appliance can handle.
 
 
             **[NOTE]**
@@ -775,7 +806,7 @@ blueprint:
 
             Leave empty if *dynamic current control* is deactivated.
 
-            '
+            "
           default: 6
           selector:
             number:
@@ -786,7 +817,7 @@ blueprint:
               mode: slider
         max_current:
           name: Maximum dynamic current
-          description: 'Maximum current per phase your appliance can handle.
+          description: "Maximum current per phase your appliance can handle.
 
 
             **[NOTE]**
@@ -795,7 +826,7 @@ blueprint:
 
             Leave empty if *dynamic current control* is deactivated.
 
-            '
+            "
           default: 16
           selector:
             number:
@@ -806,7 +837,8 @@ blueprint:
               mode: slider
         min_solar_percent:
           name: Minimum solar power percentage
-          description: 'Minimum percentage of solar power to run the appliance. E.g. if
+          description:
+            "Minimum percentage of solar power to run the appliance. E.g. if
             you configure it to 40%, your appliance will be on as long as 40% of the power
             comes from solar. This is useful to keep running the appliance even at times
             of low production, like sunset or sunrise, or in case you have a PV that is
@@ -819,57 +851,57 @@ blueprint:
             the dynamic current appliance at minimum current as long as it can be partially
             run on solar.**
 
-            '
+            "
           default: 100
           selector:
             number:
               min: 1.0
               max: 100.0
               step: 1.0
-              unit_of_measurement: '%'
+              unit_of_measurement: "%"
               mode: slider
   source_url: https://github.com/nicorusti/ha-advanced-blueprints/blob/main/PV_Excess_Control/blueprints/automation/pv_excess_control.yaml
 mode: single
 triggers:
-- trigger: homeassistant
-  event: start
+  - trigger: homeassistant
+    event: start
 action:
-- service: pyscript.pv_excess_control
-  data:
-    automation_id: !input automation_id
-    appliance_priority: !input appliance_priority
-    export_power: !input export_power
-    pv_power: !input pv_power
-    load_power: !input load_power
-    home_battery_level: !input home_battery_level
-    min_home_battery_level: !input min_home_battery_level
-    min_home_battery_level_start: !input min_home_battery_level_start
-    zero_feed_in: !input zero_feed_in
-    zero_feed_in_load: !input zero_feed_in_load
-    zero_feed_in_level: !input zero_feed_in_level
-    dynamic_current_appliance: !input dynamic_current_appliance
-    round_target_current: !input round_target_current
-    deactivating_current: !input deactivating_current
-    appliance_current_interval: !input appliance_current_interval
-    appliance_phases: !input appliance_phases
-    min_current: !input min_current
-    max_current: !input max_current
-    min_solar_percent: !input min_solar_percent
-    appliance_switch: !input appliance_switch
-    appliance_switch_interval: !input appliance_switch_interval
-    appliance_switch_off_interval: !input appliance_switch_off_interval
-    appliance_current_set_entity: !input appliance_current_set_entity
-    actual_power: !input actual_power
-    defined_current: !input defined_current
-    appliance_on_only: !input appliance_on_only
-    grid_voltage: !input grid_voltage
-    import_export_power: !input import_export_power
-    home_battery_capacity: !input home_battery_capacity
-    solar_production_forecast: !input solar_production_forecast
-    solar_production_forecast_this_hour: !input solar_production_forecast_this_hour
-    time_of_sunset: !input time_of_sunset
-    appliance_once_only: !input appliance_once_only
-    appliance_maximum_run_time: !input appliance_maximum_run_time
-    appliance_minimum_run_time: !input appliance_minimum_run_time
-    appliance_runtime_deadline: !input appliance_runtime_deadline
-    enabled: !input enabled
+  - service: pyscript.pv_excess_control
+    data:
+      automation_id: !input automation_id
+      appliance_priority: !input appliance_priority
+      export_power: !input export_power
+      pv_power: !input pv_power
+      load_power: !input load_power
+      home_battery_level: !input home_battery_level
+      min_home_battery_level: !input min_home_battery_level
+      min_home_battery_level_start: !input min_home_battery_level_start
+      zero_feed_in: !input zero_feed_in
+      zero_feed_in_load: !input zero_feed_in_load
+      zero_feed_in_level: !input zero_feed_in_level
+      dynamic_current_appliance: !input dynamic_current_appliance
+      round_target_current: !input round_target_current
+      deactivating_current: !input deactivating_current
+      appliance_current_interval: !input appliance_current_interval
+      appliance_phases: !input appliance_phases
+      min_current: !input min_current
+      max_current: !input max_current
+      min_solar_percent: !input min_solar_percent
+      appliance_switch: !input appliance_switch
+      appliance_switch_interval: !input appliance_switch_interval
+      appliance_switch_off_interval: !input appliance_switch_off_interval
+      appliance_current_set_entity: !input appliance_current_set_entity
+      actual_power: !input actual_power
+      defined_current: !input defined_current
+      appliance_on_only: !input appliance_on_only
+      grid_voltage: !input grid_voltage
+      import_export_power: !input import_export_power
+      home_battery_capacity: !input home_battery_capacity
+      solar_production_forecast: !input solar_production_forecast
+      solar_production_forecast_this_hour: !input solar_production_forecast_this_hour
+      time_of_sunset: !input time_of_sunset
+      appliance_once_only: !input appliance_once_only
+      appliance_maximum_run_time: !input appliance_maximum_run_time
+      appliance_minimum_run_time: !input appliance_minimum_run_time
+      appliance_runtime_deadline: !input appliance_runtime_deadline
+      enabled: !input enabled
