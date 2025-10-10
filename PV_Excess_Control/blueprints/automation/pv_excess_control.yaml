@@ -728,9 +728,7 @@ blueprint:
           description:
             "Tick this box if your appliance supports different current levels.
             Useful e.g. for **wallboxes**. If false, the appliance will only be switched
-            on or off in relation to the PV excess.
-
-            "
+            on or off in relation to the PV excess."
           default: false
           selector:
             boolean: {}
@@ -738,9 +736,7 @@ blueprint:
           name: Round target current
           description:
             "Tick this box if your appliance only supports integer target currents.
-            Will round to full integers.
-
-            "
+            Will round to full integers."
           default: false
           selector:
             boolean: {}
@@ -748,9 +744,7 @@ blueprint:
           name: Wallbox Deactivation with current 0?
           description:
             "Tick this box if your wallbox needs to be set to current 0 for
-            deactivating else min_current is used.
-
-            "
+            deactivating else min_current is used."
           default: false
           selector:
             boolean: {}
@@ -758,14 +752,7 @@ blueprint:
           name: Appliance current interval
           description:
             "Specifies the minimum time (in minutes) that must pass before
-            the power setting can be dynamically adjusted again.
-
-
-            **[NOTE]**
-
-            - **Only relevant when dynamic current control is set!**
-
-            "
+            the power setting can be dynamically adjusted again."
           default: 1
           selector:
             number:
@@ -777,16 +764,7 @@ blueprint:
         appliance_current_set_entity:
           name: Appliance SetCurrent entity
           description:
-            "The number entity to which the calculated current will be sent.
-
-
-            **[NOTE]**
-
-            - **Only relevant when dynamic current control is set!**
-
-            Leave empty if *dynamic current control* is deactivated.
-
-            "
+            "The number entity to which the calculated current will be sent."
           default:
           selector:
             entity:
@@ -797,16 +775,7 @@ blueprint:
               reorder: false
         min_current:
           name: Minimum dynamic current
-          description: "Minimum current per phase your appliance can handle.
-
-
-            **[NOTE]**
-
-            - **Only relevant when dynamic current control is set!**
-
-            Leave empty if *dynamic current control* is deactivated.
-
-            "
+          description: "Minimum current per phase your appliance can handle."
           default: 6
           selector:
             number:
@@ -817,16 +786,7 @@ blueprint:
               mode: slider
         max_current:
           name: Maximum dynamic current
-          description: "Maximum current per phase your appliance can handle.
-
-
-            **[NOTE]**
-
-            - **Only relevant when dynamic current control is set!**
-
-            Leave empty if *dynamic current control* is deactivated.
-
-            "
+          description: "Maximum current per phase your appliance can handle."
           default: 16
           selector:
             number:
