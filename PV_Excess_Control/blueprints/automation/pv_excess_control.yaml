@@ -271,29 +271,36 @@ blueprint:
               unit_of_measurement: "%"
               mode: slider
         min_home_battery_level_start:
-          name: Minimum home battery level (to start)
-          description:
-            "Minimum desired power level (in percent) of your home battery
-            (to start) .
-
-            Tick this box if your appliance should only be turned on, if enough battery
-            level and without solar forecast prediction.
+          name: Minimum home battery level (to start forecast optimization)
+          description: 'Battery level (in percent) at which forecast optimization begins.
+          
+            **Behavior:**
+            - **0%**: Always use forecast optimization (old False behavior)
+            - **Same as end-of-day level**: Ignore forecast completely (old True behavior)  
+            - **Between 0% and end-of-day**: Hybrid mode - above this level, forecast optimization starts
+            
+            **Examples:**
+            - Set to 30% with end-of-day 80%: Below 30% only use export power, above 30% use forecast-optimized PV excess
+            - Set to 80% with end-of-day 80%: Always ignore forecast, use PV excess immediately when battery ≥ 80%
+            - Set to 0%: Always use intelligent forecast optimization
 
             **[WARNING]**
 
-            - **This sensor must be the same for all your created automations based on
-            this blueprint!**
-
+            - **This value must be the same for all your created automations based on this blueprint!**
 
             **[NOTE]**
 
-            - *The home battery will be charged to the specified level *before* switching
-            on appliances or to consider solar production forecast.
-
-            "
-          default: false
+            - *The home battery will be charged to this level before forecast optimization begins.*
+            
+            '
+          default: 0
           selector:
-            boolean: {}
+            number:
+              min: 0.0
+              max: 100.0
+              step: 5.0
+              unit_of_measurement: '%'
+              mode: slider
         home_battery_capacity:
           name: Home battery capacity
           description: "The usable capacity (in kWh) of your home battery
