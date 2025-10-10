@@ -904,7 +904,7 @@ class PvExcessControl:
                         allowed_excess_power_consumption = (
                             self._calculate_power_consumption(inst)
                         )
-                    # 07.03.2025 elif inst.dynamic_appliance:
+                    # 07.03.2025 elif inst.dynamic_current_appliance:
                     #    allowed_excess_power_consumption = (
                     #        inst.defined_current
                     #        * PvExcessControl.grid_voltage
