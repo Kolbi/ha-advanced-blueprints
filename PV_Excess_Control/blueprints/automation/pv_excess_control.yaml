@@ -763,8 +763,7 @@ blueprint:
               mode: slider
         appliance_current_set_entity:
           name: Appliance SetCurrent entity
-          description:
-            "The number entity to which the calculated current will be sent."
+          description: "The number entity to which the calculated current will be sent."
           default:
           selector:
             entity:
