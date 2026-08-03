@@ -578,7 +578,7 @@ class PvExcessControl:
                     home_battery_level = _get_num_state(
                         PvExcessControl.home_battery_level
                     )
-                
+
                 # New logic with percentage-based start level
                 if home_battery_level < PvExcessControl.min_home_battery_level_start:
                     # Battery below start level - only use export power (battery has priority)
@@ -602,10 +602,12 @@ class PvExcessControl:
                         f"{inst.log_prefix} Battery level ({home_battery_level}%) is below start level ({PvExcessControl.min_home_battery_level_start}%). "
                         f"Using >> export power only <<: {avg_excess_power} W (battery charging has priority)"
                     )
-                
+
                 elif (
-                    PvExcessControl.min_home_battery_level_start == PvExcessControl.min_home_battery_level
-                    and home_battery_level >= PvExcessControl.min_home_battery_level_start
+                    PvExcessControl.min_home_battery_level_start
+                    == PvExcessControl.min_home_battery_level
+                    and home_battery_level
+                    >= PvExcessControl.min_home_battery_level_start
                 ):
                     # Start level equals end-of-day level - ignore forecast completely (old True behavior)
                     avg_excess_power = int(
@@ -628,7 +630,7 @@ class PvExcessControl:
                         f"{inst.log_prefix} Battery level ({home_battery_level}%) is above start level ({PvExcessControl.min_home_battery_level_start}%) "
                         f"and start level equals end-of-day level. Using >> PV excess immediately << (ignoring forecast): {avg_excess_power} W"
                     )
-                
+
                 elif (
                     home_battery_level >= PvExcessControl.min_home_battery_level
                     or not self._force_charge_battery(avg_load_power)
